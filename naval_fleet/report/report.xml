@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="report_daily_view" model="ir.actions.report">
+            <field name="name">Report Daily</field>
+            <field name="model">ship.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">naval_fleet.report_daily_template</field>
+            <field name="report_file">naval_fleet.report_daily_template</field>
+            <field name="print_report_name">'Report Daily- %s'% (form['name'][1]) </field>
+        </record>
+    </data>
+</odoo>

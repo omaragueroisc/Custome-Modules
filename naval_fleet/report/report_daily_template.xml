@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="report_daily_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="text-center">
+<!--                            <strong>تقرير ربحية اﻷصناف</strong>-->
+
+                        </div>
+                        <div class="text-center">
+                            <h1>
+                                <strong>
+                                    <span t-if="form['name']">
+                                        <t t-esc="form['name'][1]"/>
+                                    </span>
+                                </strong>
+                            </h1>
+                        </div>
+                        <div>
+                            <span t-if="form['from_date']">From Date:
+                                <t t-esc="form['from_date']"/>
+                            </span>
+                            <span t-if="form['to_date']">
+                                -- To Date:
+                                <t t-esc="form['to_date']"/>
+                            </span>
+
+                        </div>
+
+                        <div>
+                            <table class="table table-condensed border rounded table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">N</th>
+                                        <th class="text-center">DATE</th>
+                                        <th class="text-center ">RUNNING HOURS</th>
+                                        <th class="text-center">FUEL CONSUMPTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="invoice_count" t-value="0"/>
+                                    <t t-foreach="lines" t-as="line">
+                                        <t t-set="invoice_count" t-value="invoice_count+1"/>
+                                        <tr>
+                                            <td class="text-center">
+                                                <span t-esc="invoice_count"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line['date']"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line['running_hours']"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line['fuel_consumption']"/>
+                                            </td>
+                                        </tr>
+
+
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div>
+                                Print Date/
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <data>
+        <record id="ship_info_sequence" model="ir.sequence">
+            <field name="name">Ship Info</field>
+            <field name="code">ship.info.sequence</field>
+            <field name="prefix">Tug</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="0"/>
+        </record>
+    </data>
+</odoo>

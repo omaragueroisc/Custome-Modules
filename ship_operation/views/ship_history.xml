@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id='ship_history_view_form' model='ir.ui.view'>
+            <field name="name">ship.operation.history.form</field>
+            <field name="model">ship.operation.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="Vessels Details">
+                                <field name="shipment_id"/>
+                                <label for="rotation_num" string="Rotation Number"/>
+                                <div class="d-flex">
+                                    <field name="rotation_num"/>
+                                    <span class="o_form_label mx-3 w-50">Movement Number</span>
+                                    <field name="movement_number"/>
+                                </div>
+                                <field name="name" domain="[('company_type', '=', 'person'), ('user_ids', '=', False),
+                                                            ('company_id', '=', False)]"/>
+                                <field name="vessel_agent" domain="[('company_type', '=', 'company'), ('user_ids', '=', False)]"/>
+                                <field name="imo"/>
+                                <field name="loa"/>
+                                <field name="vessel_type"/>
+                                <field name="vessel_readiness_to_sail_time"/>
+                                <field name="flag"/>
+                                <field name="grt"/>
+                                <field name="nrt"/>
+                                <field name="dwt"/>
+                                <field name="next_port"/>
+                                <field name="last_port"/>
+                                <field name="d_fwd"/>
+                                <field name="d_aft"
+                                       attrs="{'invisible': [('movement_type', 'in', [False, 'berthing', 'shifting', 're_position', 'pilot_disembark'])]}"/>
+                                <field name="call_sign"/>
+                                <field name="year_of_build"/>
+                            </group>
+
+                            <group string="Movement Details"
+                                    attrs="{'invisible': [('actual_arrival', '=', False)]}">
+                                <field name="movement_type"/>
+                                <label for="from_state" string="From"/>
+                                <div class="d-flex">
+                                    <field name="from_state"/>
+                                    <span class="o_form_label mx-3 "></span>
+                                    <field name="from_state_berth" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                                <label for="to_state" string="To"/>
+                                <div class="d-flex">
+                                    <field name="to_state"/>
+                                    <span class="o_form_label mx-3 "></span>
+                                    <field name="to_state_berth" options="{'no_create': True, 'no_open': True}"/>
+                                </div>
+                                <field name="pco" domain="['|', ('category_ids.name', '=', 'PCO'), ('job_id', '=', 'PCO')]"/>
+                                <field name="tower_request_time"/>
+                                <field name="tower_request_to_be_pob"/>
+                                <field name="proceed_from_outer_to_inner"
+                                       attrs="{'invisible': [('movement_type', '!=', 'berthing')]}"/>
+                                <field name="inner_arrival"
+                                        attrs="{'invisible': [('movement_type', '!=', 'berthing')]}"/>
+                                <field name="duration"/>
+                                <field name="tug_boat_ids" widget="many2many_tags" domain="[('type_ship','=','tug_boat')]"
+                                       options="{'no_create':True,'no_create_edit':True}"/>
+                                <label for="tb_leave_sh" string="Leave-SH"/>
+                                <div class="d-flex">
+                                    <field name="tb_leave_sh"/>
+                                    <span class="o_form_label mx-3 ">BACK</span>
+                                    <field name="tb_back_sh"/>
+                                </div>
+                                <label for="midfast_time" string="MADE FAST"/>
+                                <div class="d-flex">
+                                    <field name="midfast_time"/>
+                                    <span class="o_form_label mx-3 ">Clear</span>
+                                    <field name="clear_time"/>
+                                </div>
+                                <field name="pilot_boat_ids" widget="many2many_tags"
+                                       domain="[('type_ship','=','pilot_boat')]"
+                                       options="{'no_create':True,'no_create_edit':True}"/>
+                                <label for="pb_leave_sh"/>
+                                <div class="d-flex">
+                                    <field name="pb_leave_sh"/>
+                                    <span class="o_form_label mx-3 w-50">Back-SH-A</span>
+                                    <field name="pb_back_sh"/>
+                                </div>
+                                <label for="pb_leave_sh_b"/>
+                                <div class="d-flex">
+                                    <field name="pb_leave_sh_b"/>
+                                    <span class="o_form_label mx-3 w-50">Back-SH-B</span>
+                                    <field name="pb_back_sh_b"/>
+                                </div>
+                                <field name="mooring_boat_ids" widget="many2many_tags"
+                                       domain="[('type_ship','=','mooring_boat')]"
+                                       options="{'no_create':True,'no_create_edit':True}" string="Mooring Boat"/>
+                                <label for="mb_leave_sh"/>
+                                <div class="d-flex">
+                                    <field name="mb_leave_sh"/>
+                                    <span class="o_form_label mx-3 ">BACK</span>
+                                    <field name="mb_back_sh"/>
+                                </div>
+                            </group>
+                            <group string="Vessel Timing">
+                                <field name="expected_arrival"/>
+                                <field name="actual_arrival"/>
+                                <field name="actual_arrival_time" string="Actual Outer Arrival"/>
+                                <field name="expected_departure_time"/>
+                                <field name="actual_response_time_achieved_per_operation"/>
+                                <field name="actual_leave"
+                                    attrs="{'invisible': [('movement_type', 'in', [False, 'berthing', 'shifting', 're_position', 'pilot_disembark'])]}"/>
+                            </group>
+                            <group string="Pilot Timing"
+                                    attrs="{'invisible': [('actual_arrival', '=', False)]}">
+                                <field name="pilot_id" domain="['|', ('category_ids.name', '=', 'Pilot'), ('job_id', '=', 'Pilot')]"/>
+                                <field name="pilot_leave_sh"
+                                            attrs="{'invisible': [('movement_type', 'in', ('pilot_disembark'))]}"/>
+                                <field name="pilot_arrival"/>
+                                <field name="on_board"/>
+                                <field name="first_line" string="FIRST LINE (F/L)"
+                                       attrs="{'invisible': [('movement_type', 'in', ('pilot_disembark','sailing'))]}"/>
+                                <field name="last_rope_tied_time"
+                                       attrs="{'invisible': [('movement_type', 'in', ('pilot_disembark','sailing'))]}"/>
+                                <field name="all_clear"
+                                       attrs="{'invisible': [('movement_type', 'in', ('berthing'))]}"/>
+                                <field name="pilot_away" string="PILOT AWAY (P/A)"/>
+                                <field name="pilot_back_sh"/>
+                            </group>
+                            <group string="Cargo Details"
+                                   attrs="{'invisible': [('movement_type', 'in', [False, 'berthing', 'shifting', 're_position', 'pilot_disembark'])]}">
+                                <field name="cargo_start_operation"/>
+                                <field name="cargo_finish_operation"/>
+                                <field name="cargo_type"/>
+                                <field name="quantity"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--        start Tree view -->
+        <record id='ship_history_view_tree' model='ir.ui.view'>
+            <field name="name">ship.operation.history.tree</field>
+            <field name="model">ship.operation.history</field>
+            <field name="arch" type="xml">
+                <tree create="1" delete="1" import="1">
+                    <field name="rotation_num"/>
+                    <field name="movement_number"/>
+                    <field name="name"/>
+                    <field name="vessel_agent"/>
+                    <field name="imo"/>
+                    <field name="call_sign"/>
+                    <field name="year_of_build"/>
+                    <field name="actual_arrival_time"/>
+                    <field name="movement_type"/>
+                    <field name="from_state"/>
+                    <field name="from_state_berth"/>
+                    <field name="to_state"/>
+                    <field name="to_state_berth"/>
+                    <field name="tower_request_time"/>
+                    <field name="proceed_from_outer_to_inner"/>
+                    <field name="inner_arrival"/>
+                    <field name="duration"/>
+                    <field name="tug_boat_ids" widget="many2many_tags"/>
+                    <field name="tb_leave_sh"/>
+                    <field name="tb_back_sh"/>
+                    <field name="midfast_time"/>
+                    <field name="clear_time"/>
+                    <field name="pilot_boat_ids" widget="many2many_tags"/>
+                    <field name="pb_leave_sh"/>
+                    <field name="pb_back_sh"/>
+                    <field name="pb_leave_sh_b"/>
+                    <field name="pb_back_sh_b"/>
+                    <field name="mooring_boat_ids" widget="many2many_tags"/>
+                    <field name="mb_leave_sh"/>
+                    <field name="mb_back_sh"/>
+                    <field name="pilot_id"/>
+                    <field name="pilot_leave_sh"/>
+                    <field name="pilot_arrival"/>
+                    <field name="on_board"/>
+                    <field name="all_clear"/>
+                    <field name="first_line"/>
+                    <field name="last_rope_tied_time"/>
+                    <field name="pilot_away"/>
+                    <field name="pilot_back_sh"/>
+                    <field name="cargo_start_operation"/>
+                    <field name="cargo_finish_operation"/>
+                    <field name="cargo_type"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_ship_operation_history_search" model="ir.ui.view">
+            <field name="name">ship.operation.history.search</field>
+            <field name="model">ship.operation.history</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search>
+                    <!-- Add your search fields and filters here -->
+                    <field name="shipment_id"/>
+                    <filter name="my_filter" string="Shipment" domain="[('shipment_id', '!=', False)]"/>
+                    <group string="Group by Carrier Delivery">
+                        <filter string="Shipment" name="group_by_shipment"
+                                context="{'group_by': 'shipment_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_ship_history" model="ir.actions.act_window">
+            <field name="name">Ship.operation.history</field>
+            <field name="res_model">ship.operation.history</field>
+            <field name="view_mode">tree,search,form</field>
+        </record>
+
+
+        <menuitem id="ship_history_menu" name="Ship History" sequence="2" parent="ship_operation.ship_operation_root"
+                  action="action_ship_history"/>
+    </data>
+</odoo>

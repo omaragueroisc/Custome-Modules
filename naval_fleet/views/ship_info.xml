@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id='ship_info_view_form' model='ir.ui.view'>
+            <field name="name">ship_info.form</field>
+            <field name="model">ship.info</field>
+            <field name="arch" type="xml">
+                <form string="Ships">
+                    <sheet>
+
+                        <notebook>
+                            <page string="Information" name="information">
+                                <field name="image_128" widget="image" class="oe_avatar"/>
+                                <div class="oe_title">
+                                    <label for="name"/>
+                                    <h1>
+                                        <field name="name" placeholder="Ship Name" string="Ship Name" required="1"/>
+                                    </h1>
+                                </div>
+                                <group>
+                                    <group string="Vessel">
+                                        <field name="type_ship" required="1"/>
+                                        <field name="model" string="Model"/>
+                                        <field name="IMO_number"/>
+                                        <field name="flag"/>
+                                        <field name="ship_status"/>
+                                        <div>
+                                            <div style="background-color:green;width:10px; height:10px; border-radius:50%"
+                                                 attrs="{'invisible':[('ship_status', '!=', '1')]}">
+                                            </div>
+                                            <div style="background-color:orange;width:10px; height:10px; border-radius:50%"
+                                                 attrs="{'invisible':[('ship_status', '!=', '2')]}">
+                                            </div>
+                                            <div style="background-color:red;width:10px; height:10px; border-radius:50%"
+                                                 attrs="{'invisible':[('ship_status', '!=', '3')]}">
+                                            </div>
+                                        </div>
+                                        <br></br>
+
+                                        <!--                                        <field name="selection_progress_1" widget="progressbar" colors="red:100"-->
+                                        <!--                                               />-->
+                                        <!--                                        <field name="selection_progress_2" widget="progressbar"-->
+                                        <!--                                               attrs="{'invisible':[('selection_field', '!=', '2')]}"/>-->
+                                        <!--                                        <field name="selection_progress_3" widget="progressbar"-->
+                                        <!--                                               attrs="{'invisible':[('selection_field', '!=', '3')]}"-->
+                                        <!--                                               class="o_progressbar"/>-->
+
+                                        <field name="port_if_register" string="Port If Register"/>
+                                        <field name="call_sign"/>
+                                        <field name="total_hp"/>
+                                        <field name="total_kw"/>
+                                        <!--                                        <field name="time"/>-->
+                                    </group>
+                                    <group>
+                                        <field name="tank_capacity" string="Tank Capacity"/>
+                                        <field name="fuel_exist_in_tank" readonly="1"/>
+                                        <field name="fuel_progress_bar" widget="progressbar"
+                                               colors="red:80,yellow:50,green:0"/>
+                                        <div class="oe_title">
+                                            <h1>
+                                                <label for="current_running_hours"/>
+                                                <field name="current_running_hours"/>
+                                            </h1>
+                                        </div>
+                                    </group>
+                                </group>
+                                <group col="4">
+                                    <group string="General Information" colspan="2">
+                                        <field name="gross_tonnage"/>
+                                        <field name="net_tonnage"/>
+                                        <field name="dead_weight"/>
+                                        <field name="overall_length"/>
+                                        <field name="lpp"/>
+                                        <field name="breadth"/>
+                                        <field name="depth"/>
+                                        <field name="draught"/>
+                                        <field name="free_board"/>
+                                    </group>
+                                    <group string="Machinery Information" colspan="2">
+                                        <group string="MAIN ENGINE" colspan="1">
+                                            <field name="main_manufacturer" string="Manufacturer"/>
+                                            <field name="main_model" string="Model"/>
+                                            <field name="main_stbd_sr_no" string="STBD Sr No"/>
+                                            <field name="main_psd_sr_no" string="PSD Sr No"/>
+                                        </group>
+                                        <group string="AUXILIARY ENGINE" colspan="1">
+                                            <field name="auxiliary_manufacturer" string="Manufacturer"/>
+                                            <field name="auxiliary_model" string="Model"/>
+                                            <field name="auxiliary_stbd_sr_no" string="STBD Sr No"/>
+                                            <field name="auxiliary_psd_sr_no" string="PSD Sr No"/>
+                                            <field name="auxiliary_center_sr_no" string="Center Sr No"/>
+
+                                        </group>
+
+                                    </group>
+                                </group>
+
+
+                            </page>
+
+
+                            <page string="Certificate" name="certificate">
+                                <group>
+                                    <group>
+                                        <field name="certificate_id"/>
+                                        <field name="certificate_state"/>
+                                        <field name="certificate_number"/>
+                                        <field name="certificate_type"/>
+                                        <field name="certificate_start_date"/>
+                                        <field name="certificate_expire_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="certificate_attach_file" widget="image" string="Attach File"/>
+                                        <field name="certificate_attach_file_1" widget="image" string="Attach File"/>
+                                    </group>
+                                </group>
+                                <field name="certificate_ids" nolabel="1"/>
+                            </page>
+                            <page string="Services" name="services">
+                                <group>
+                                    <group>
+                                        <button string="Request Maintenance" type="object" class="btn-success"
+                                                name="open_request_maintenance"/>
+                                    </group>
+                                    <group>
+                                        <button string="Add Fuel" type="object" class="btn-primary" icon="fa-plus"
+                                                name="add_fuel_func"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                            <page string="Report" name="report">
+                                <group>
+                                    <group>
+                                        <button string="Report Daily" type="object" class="btn-success"
+                                                name="open_create_report_daily"/>
+                                    </group>
+                                    <group>
+                                        <button string="Print Report Daily" type="object"
+                                                class="oe_highlight btn btn-primary"
+                                                name="print_report_daily" icon="fa-print"/>
+                                    </group>
+                                </group>
+                                <field name="report_ids" nolabel="1" readonly="1"/>
+
+                            </page>
+                            <!--                            <page string="Movement Time" name="move_time">-->
+                            <!--                                <field name="ship_move_time_ids" readonly="1">-->
+                            <!--                                    <tree>-->
+                            <!--                                        <field name="shipment_id"/>-->
+                            <!--                                        <field name="time"/>-->
+                            <!--                                        <field name="duration"/>-->
+
+                            <!--                                    </tree>-->
+                            <!--                                </field>-->
+                            <!--                            </page>-->
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!--        start Tree view -->
+        <record id='ship_info_view_tree' model='ir.ui.view'>
+            <field name="name">ship.info.tree</field>
+            <field name="model">ship.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="IMO_number" optional="show"/>
+                    <field name="type_ship" optional="show"/>
+                    <field name="tank_capacity" optional="show"/>
+                    <field name="fuel_progress_bar" optional="show"/>
+                    <field name="current_running_hours" optional="show"/>
+                    <!--                    <field name="time" optional="show"/>-->
+                    <field name="create_date" string="Create Date" optional="show"/>
+                </tree>
+            </field>
+        </record>
+        <!--        end  Tree view -->
+
+
+        <!-- Start Kanban view        -->
+        <record id='ship_info_view_kanban' model='ir.ui.view'>
+            <field name="name">ship.info.kanban</field>
+            <field name="model">ship.info</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="type_ship" group_expand="True" sample="1" records_draggable="0"
+                        quick_create="false">
+                    <field name="name"/>
+                    <field name="IMO_number"/>
+                    <field name="flag"/>
+                    <field name="id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="o_kanban_image">
+                                    <img alt="Avatar"
+                                         t-att-src="kanban_image('ship.info', 'image_128',record.id.raw_value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <t t-if="record.name">Tug Name:
+                                            <field name="name"/>
+                                        </t>
+                                    </strong>
+                                    <div class="o_kanban_tags_section">
+                                        <t t-if="record.model">Model:
+                                            <field name="model"/>
+                                        </t>
+                                    </div>
+                                    <div class="o_kanban_tags_section">
+                                        <t t-if="record.IMO_number">IMO#:
+                                            <field name="IMO_number"/>
+                                        </t>
+                                    </div>
+                                    <div class="o_kanban_tags_section">
+                                        <t t-if="record.flag">Flag:
+                                            <field name="flag"/>
+                                        </t>
+                                    </div>
+                                    <div class="o_kanban_tags_section">
+                                        <t t-if="record.current_running_hours">Running Hours:
+                                            <field name="current_running_hours"/>
+                                        </t>
+                                    </div>
+                                    <div class="o_kanban_tags_section" style="display: none;">
+                                        <t t-if="record.ship_status">Selection Field:
+                                            <field name="ship_status"/>
+                                        </t>
+                                    </div>
+                                    <div class="o_kanban_tags_section" style="margin-bottom:8px;margin-top:5px;">
+                                        <t>
+                                            <div>
+                                                <div style="background-color:green;width:10px; height:10px; border-radius:50%"
+                                                     attrs="{'invisible':[('ship_status', '!=', '1')]}">
+                                                </div>
+                                                <div style="background-color:orange;width:10px; height:10px; border-radius:50%"
+                                                     attrs="{'invisible':[('ship_status', '!=', '2')]}">
+                                                </div>
+                                                <div style="background-color:red;width:10px; height:10px; border-radius:50%"
+                                                     attrs="{'invisible':[('ship_status', '!=', '3')]}">
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 o_kanban_primary">
+                                            <button class="btn btn-success" name="open_request_maintenance"
+                                                    type="object" style="border-radius:5px">
+                                                <span>Request Maintenance</span>
+
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- End Kanban view        -->
+
+
+        <record id="ship_info_view_search" model="ir.ui.view">
+            <field name="name">ship.info.search</field>
+            <field name="model">ship.info</field>
+            <field name="arch" type="xml">
+                <search string="All Ships and Tug">
+                    <field string="Tug Name" name="name"/>
+                    <field string="IMO#" name="IMO_number"/>
+                    <field string="Tug Model" name="model"/>
+                    <filter string="Type Ship" name="type ship" domain="[]" context="{'group_by':'type_ship'}"/>
+                    <filter name="my_filter" string="Tug Name" domain="[]" context="{'group_by':'name'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_ship_info" model="ir.actions.act_window">
+            <field name="name">Ship</field>
+            <field name="res_model">ship.info</field>
+            <field name="view_mode">kanban,tree,form,search,calendar</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Ready to manage your Ship more efficiently ?
+                </p>
+                <p>
+                    Let's create your first Ship Or Tug.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="ship_root" name="RS Fleet" web_icon="naval_fleet,static/description/tug.png"/>
+        <menuitem id="ship_menuitem" name="Ship" sequence="1" parent="ship_root" action="action_ship_info"/>
+        <!--        <menuitem id="menu_shipment_history" name="Ship History" sequence="2" parent="ship_root"-->
+        <!--                  action="action_ship_info"/>-->
+    </data>
+</odoo>

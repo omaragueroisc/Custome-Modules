@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_maintenance_time_sheet,custom_maintenance_to_ships.custom_maintenance_time_sheet,model_maintenance_time_sheet,,1,1,1,1
+access_custom_mainspare_spare_parts,custom_maintenance_to_ships.spare.parts,model_spare_parts,,1,1,1,1
+access_shipment_maintenance,shipment.maintenance,model_shipment_maintenance,,1,1,1,1

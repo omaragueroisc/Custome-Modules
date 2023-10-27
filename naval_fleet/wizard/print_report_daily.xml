@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="print_report_daily_form_view_wizard" model="ir.ui.view">
+            <field name="name">print_report_daily_form_view_wizard</field>
+            <field name="model">print.report.daily.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Report Daily">
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="name" string="Tug Name"/>
+                        </group>
+                        <group>
+                            <field name="to_date"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print" icon="fa-print" type="object" class="btn-primary"
+                                data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="print_report_daily_act_window" model="ir.actions.act_window">
+            <field name="name">Report Daily</field>
+            <field name="res_model">print.report.daily.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

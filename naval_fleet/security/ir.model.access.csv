@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ship_info,ship.ship.info,model_ship_info,,1,1,1,1
+access_ship_certificate,ship.ship.certificate,model_ship_certificate,,1,1,1,1
+access_request_maintenance,ship.request.maintenance,model_request_maintenance,,1,1,1,1
+access_ship_report,ship.ship.report,model_ship_report,,1,1,1,1
+access_report_daily_wizard,ship.report.daily.wizard,model_report_daily_wizard,,1,1,1,1
+access_print_report_daily_wizard,ship.print.report.daily.wizard,model_print_report_daily_wizard,,1,1,1,1
+access_add_fuel,ship.add.fuel.wizard,model_add_fuel_wizard,,1,1,1,1

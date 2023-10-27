@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <report
+            id="report_print_shipment"
+            model="ship.operation.history"
+            report_type="qweb-pdf"
+            string="Shipment History"
+            name="ship_operation.shipment_report_document"
+            file="ship_operation.shipment_report_document"
+    />
+</openerp>

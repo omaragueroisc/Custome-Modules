@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="request_maintenance_form_view" model="ir.ui.view">
+            <field name="name">profitability.report.form</field>
+            <field name="model">request.maintenance</field>
+            <field name="arch" type="xml">
+                <form string="Request Maintenance">
+                    <group>
+                        <group>
+                            <field name="ship_id" readonly="1"/>
+                            <field name="name" required="1"/>
+                            <field name="request_priority" widget="priority"/>
+                            <field name="maintenance_request_detail"/>
+                        </group>
+                        <group>
+                            <field name="user_id" readonly="1"/>
+                            <field name="date_request" required="1"/>
+                            <field name="services" required="1"/>
+                            <field name="list_of_damage"/>
+                            <field name="attachment"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="create_request_maintenance" string="Create Request" icon="fa-plus" type="object"
+                                class="btn-primary"
+                                data-hotkey="q"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="request_maintenance_act_window" model="ir.actions.act_window">
+            <field name="name">Request Maintenance</field>
+            <field name="res_model">request.maintenance</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ship_operation.shipment_document_report_op">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context({'lang':doc.name.lang})"/>
+            <div class="page">
+                <div class="oe_structure"/>
+                <style type="text/css">
+                    table {
+                    text-align:left;
+                    }
+                    .tmh {
+                        background-color:black;
+                    }
+                    .th-red {
+                    color:red;
+                    }
+                    .th-style {
+                    width:25%;
+                    }
+                    .th-style-l {
+                    width:5%;
+                    }
+                    .th-style-l-value {
+                    width:25%;
+                    }
+                    .th-style-l-value-left {
+                    width:15%;
+                    }
+                </style>
+                <table class="table table-borderless">
+                    <tr>
+                        <th colspan="2" class="th-red pt-0">Rotation Name</th>
+                        <th colspan="2" class="pt-0 mb-0">
+                            <span t-field="doc.rotation_num"/>
+                        </th>
+                        <th colspan="2" class="th-red pt-0">Vessels Name</th>
+                        <th colspan="2" class="pt-0 mb-0">
+                            <span style="font-weight:normal;" t-field="doc.name"/>
+                        </th>
+                    </tr>
+                    <tr class="pt-0 mt-0">
+                        <th colspan="2" class="pt-0 mb-0">IMO</th>
+                        <th colspan="2" class="pt-0 mb-0">
+                            <span style="font-weight:normal;" t-field="doc.imo"/>
+                        </th>
+                        <th colspan="2" class="pt-0 mb-0">Expected Arrival</th>
+                        <th colspan="2" class="pt-0 mb-0">
+                            <span t-field="doc.expected_arrival"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="pt-0">LOA</th>
+                        <th colspan="2" class="pt-0">
+                            <span style="font-weight:normal;" t-field="doc.loa"/>
+                        </th>
+                        <th colspan="2" class="pt-0">Actual Outer Arrival</th>
+                        <th colspan="2" class="pt-0">
+                            <span t-field="doc.actual_arrival_time"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="pt-0">Vessel Type</th>
+                        <th colspan="2" class="pt-0">
+                            <span style="font-weight:normal;" t-field="doc.vessel_type"/>
+                        </th>
+                        <th colspan="2" class="pt-0">FLAG</th>
+                        <th colspan="2" class="pt-0">
+                            <span t-field="doc.flag"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" class="pt-0">Grt</th>
+                        <th colspan="2" class="pt-0">
+                            <span style="font-weight:normal;" t-field="doc.grt"/>
+                        </th>
+                        <th colspan="2" class="pt-0">Expected Leave</th>
+                        <th colspan="2" class="pt-0">
+                            <span t-field="doc.expected_leave"/>
+                        </th>
+                    </tr>
+                    <tr class="pt-0">
+                        <th colspan="2" class="pt-0">S.BWT</th>
+                        <th colspan="2" class="pt-0">
+                            <span style="font-weight:normal;" t-field="doc.sp"/>
+                        </th>
+                        <th colspan="2" class="pt-0">Actual Leave</th>
+                        <th colspan="2" class="pt-0">
+                            <span t-field="doc.actual_leave"/>
+                        </th>
+                    </tr>
+                    <tr class="pt-0">
+                        <th colspan="2" class="pt-0">Vessel Agent:</th>
+                        <th colspan="2" class="pt-0">
+                            <span style="font-weight:normal;" t-field="doc.vessel_agent.name"/>
+                        </th>
+                    </tr>
+                    <tr class="pt-0">
+                        <th colspan="2" class="pt-0">Call Sign</th>
+                        <th colspan="2" class="pt-0">
+                            <span style="font-weight:normal;" t-field="doc.call_sign"/>
+                        </th>
+                        <th colspan="2" class="pt-0">Year of Build</th>
+                        <th colspan="2" class="pt-0">
+                            <span t-field="doc.year_of_build"/>
+                        </th>
+                    </tr>
+                    #########################################################################
+                    <t t-foreach="doc.shipment_history_ids" t-as="l">
+                        <tr>
+                            <th colspan="12" class="th-red pt-0 tmh">Move<![CDATA[&nbsp;]]>
+                                <span t-field="l.movement_number"/>
+                            </th>
+
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="2" class="pt-0">Movement Type</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.movement_type"/>
+                            </td>
+                            <th class="pt-0">From</th>
+                            <td class="pt-0">
+                                <span t-field="l.from_state"/>
+                            </td>
+                            <th class="pt-0">TO</th>
+                            <td class="pt-0">
+                                <span t-field="l.to_state"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="2" class="pt-0">Proceed from Outer to Inner</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.proceed_from_outer_to_inner"/>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="2" class="pt-0">Inner Arrival</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.inner_arrival"/>
+                            </td>
+                            <th colspan="2" class="pt-0">ONBOARD(POB)</th>
+                            <td colspan="4" class="pt-0">
+                                <span t-field="l.on_board"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="2" class="pt-0">Duration</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.duration"/>
+                            </td>
+                            <th colspan="2" class="pt-0">Tower Request</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.tower_request_time"/>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th colspan="2" class="pt-0">Tug Boat</th>
+                            <td colspan="2" class="pt-0">
+                                <t t-foreach="l.tug_boat_ids" t-as="tug_boat">
+                                    <span t-esc="tug_boat.name"/>
+                                    <t t-if="tug_boat != l.tug_boat_ids[-1]">, </t>
+                                </t>
+                            </td>
+                            <th class="pt-0">Leave-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.tb_leave_sh"/>
+                            </td>
+                            <th class="pt-0">Back-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.tb_back_sh"/>
+                            </td>
+                        </tr>
+
+
+                        <tr class="pt-0">
+                            <th class="pt-0">MADE FAST</th>
+                            <td class="pt-0">
+                                <span t-field="l.midfast_time"/>
+                            </td>
+                            <th class="pt-0">Clear</th>
+                            <td>
+                                <span t-field="l.all_clear"/>
+                            </td>
+                        </tr>
+
+
+                        <tr class="pt-0">
+                            <th colspan="2" class="pt-0">Pilot Boat</th>
+                            <td colspan="2" class="pt-0">
+                                <t t-foreach="l.pilot_boat_ids" t-as="pilot_boat">
+                                    <span t-esc="pilot_boat.name"/>
+                                    <t t-if="pilot_boat != l.pilot_boat_ids[-1]">, </t>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr class="pt-0">
+                            <th class="pt-0">Leave-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.pb_leave_sh"/>
+                            </td>
+                            <th class="pt-0">Back-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.pb_back_sh"/>
+                            </td>
+                            <th class="pt-0">Leave-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.pb_leave_sh_b"/>
+                            </td>
+                            <th class="pt-0">Back-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.pb_back_sh_b"/>
+                            </td>
+                        </tr>
+
+
+                        <tr class="pt-0">
+                            <th colspan="2" class="pt-0">Mooring Boat</th>
+                            <td colspan="2" class="pt-0">
+                                <t t-foreach="l.mooring_boat_ids" t-as="mooring_boat">
+                                    <span t-esc="mooring_boat.name"/>
+                                    <t t-if="mooring_boat != l.mooring_boat_ids[-1]">, </t>
+                                </t>
+                            </td>
+                            <th class="pt-0">Leave-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.mb_leave_sh"/>
+                            </td>
+                            <th class="pt-0">Back-SH</th>
+                            <td class="pt-0">
+                                <span t-field="l.mb_back_sh"/>
+                            </td>
+                        </tr>
+
+
+                        <tr class="pt-0">
+                            <th colspan="2" class="pt-0">Pilot</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.pilot_id.name"/>
+                            </td>
+                            <th colspan="2" class="pt-0">LEAVE (S/H)</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.pilot_leave_sh"/>
+                            </td>
+                            <th colspan="2" class="pt-0">PILOT ARRIVAL</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.pilot_arrival"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="pt-0">First Line (F/L)</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.first_line"/>
+                            </td>
+                            <th colspan="2" class="pt-0">ALL FAST (A/F)</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.all_fast"/>
+                            </td>
+                            <th colspan="2" class="pt-0">ALL CLEAR</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.all_clear"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="pt-0">PILOT AWAY</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.pilot_away"/>
+                            </td>
+                            <th colspan="2" class="pt-0">BACK TO (S/H)</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.pilot_back_sh"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="pt-0">CARGO START OPERATION</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.cargo_start_operation"/>
+                            </td>
+                            <th colspan="2" class="pt-0">CARGO FINISH OPERATION</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.cargo_finish_operation"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="pt-0">CARGO TYPE</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.cargo_type"/>
+                            </td>
+                            <th colspan="2" class="pt-0">QUANTITY</th>
+                            <td colspan="2" class="pt-0">
+                                <span t-field="l.cargo_finish_operation"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+                </div>
+            </t>
+        </template>
+        <template id="shipment_report_document_op">
+            <t t-call="web.html_container">
+                <t t-set="record_count" t-value="0"/>
+                <t t-foreach="docs" t-as="doc">
+                    <t t-if="record_count == 0">
+                        <t t-call="ship_operation.shipment_document_report_op" t-lang="doc.name.lang"/>
+                        <t t-set="record_count" t-value="record_count + 1"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+</odoo>

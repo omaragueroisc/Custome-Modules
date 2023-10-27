@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ship_operation_ship_operation,ship_operation.ship.operation,model_ship_operation,,1,1,1,1
+access_ship_operation_history,ship.operation.history,model_ship_operation_history,,1,1,1,1
+access_ship_move_time,ship.move.time,model_ship_move_time,,1,1,1,1
+access_ship_berth,ship.berth,model_ship_berth,,1,1,1,1
+access_ship_berth_line,ship.berth.line,model_ship_berth_line,,1,1,1,1

@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="ship_operation.list">
+      <field name="name">ship_operation list</field>
+      <field name="model">ship_operation.ship_operation</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="ship_operation.action_window">
+      <field name="name">ship_operation window</field>
+      <field name="res_model">ship_operation.ship_operation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="ship_operation.action_server">
+      <field name="name">ship_operation server</field>
+      <field name="model_id" ref="model_ship_operation_ship_operation"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="ship_operation" id="ship_operation.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="ship_operation.menu_1" parent="ship_operation.menu_root"/>
+    <menuitem name="Menu 2" id="ship_operation.menu_2" parent="ship_operation.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="ship_operation.menu_1_list" parent="ship_operation.menu_1"
+              action="ship_operation.action_window"/>
+    <menuitem name="Server to list" id="ship_operation" parent="ship_operation.menu_2"
+              action="ship_operation.action_server"/>
+-->
+  </data>
+</odoo>
